@@ -14,11 +14,9 @@ export default class ActionButton extends Component {
 
         this.state = {
             active: props.active,
+            holdDuration: this.props.holdDuration,
             type: props.type,
             bgColor: props.bgColor,
-            holdAction: props.onHold,
-            holdDuration: props.holdDuration,
-
             buttonColor: props.buttonColor,
             buttonTextColor: props.buttonTextColor,
             spacing: props.spacing,
@@ -101,12 +99,16 @@ export default class ActionButton extends Component {
 
     onPressIn() {
         this.didHold = false;
-        this.holdTimeout = window.setTimeout(function() { this.didHold = true; this.props.onHold(); }, this.props.holdDuration);
+
+        var buttonInstance = this;
+
+        this.holdTimeout = window.setTimeout(function() { buttonInstance.didHold = true; buttonInstance.props.onHold(); }, this.props.holdDuration);
     }
 
     onRelease() {
-        this.didHold = false;
-        clearTimeout(this.holdTimeout);
+        window.clearTimeout(this.holdTimeout);
+
+
     }
 
     //////////////////////
@@ -133,13 +135,14 @@ export default class ActionButton extends Component {
             <View style={this.getActionButtonStyles() }>
                 <TouchableOpacity
                     activeOpacity={0.85}
-                    onPressIn={this.onPressIn}
-                    onPressOut={this.onPressOut}
+                    onPressIn={() => this.onPressIn() }
+                    onPressOut={() => this.onRelease() }
                     onPress={() => {
                         if (!this.didHold) {
                             this.props.onPress()
                             if (this.props.children) this.animateButton()
                         }
+                        this.didHold = false;
 
                     } }>
                     <Animated.View
@@ -259,6 +262,8 @@ ActionButton.propTypes = {
 
     type: PropTypes.oneOf(['float', 'tab']),
     position: PropTypes.string,
+    onHold: PropTypes.func,
+    holdDuration: PropTypes.number,
 
     bgColor: PropTypes.string,
     buttonColor: PropTypes.string,
