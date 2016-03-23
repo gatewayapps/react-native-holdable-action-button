@@ -101,7 +101,7 @@ export default class ActionButton extends Component {
 
     onPressIn() {
         this.didHold = false;
-        this.holdTimeout = window.setTimeout(function() { this.didHold = true; this.holdAction(); }, this.holdDuration);
+        this.holdTimeout = window.setTimeout(function() { this.didHold = true; this.state.holdAction(); }, this.state.holdDuration);
     }
 
     onRelease() {
