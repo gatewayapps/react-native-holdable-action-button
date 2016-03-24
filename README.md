@@ -1,5 +1,6 @@
 # react-native-action-button
 customizable multi-action-button component for react-native
+credit to mastermoo/react-native-action-button
 
 ![react-native-action-button demo](http://i.giphy.com/26BkMir9IcAhqe4EM.gif)
 ![react-native-action-button demo](http://i.giphy.com/xTcnTeW9BBXh8wMhLq.gif)
