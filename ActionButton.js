@@ -1,4 +1,5 @@
-import React, { PropTypes, Component, StyleSheet, Text, View, Animated, Easing, TouchableOpacity, PixelRatio } from 'react-native';
+import React {PropTypes, Component} from 'react';
+import {StyleSheet, Text, View, Animated, Easing, TouchableOpacity, PixelRatio } from 'react-native';
 import ActionButtonItem from './ActionButtonItem';
 
 const alignItemsMap = {
